@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PersoEditText">
+        <attr name="input_type">
+            <enum name="first_name" value="0" />
+            <enum name="last_name" value="1" />
+            <enum name="email" value="2" />
+            <enum name="email_confirmation" value="3" />
+            <enum name="address" value="4" />
+            <enum name="postal_code" value="5" />
+            <enum name="city" value="6" />
+            <enum name="phone" value="7" />
+            <enum name="mobile_phone" value="8" />
+            <enum name="landline_phone" value="9" />
+            <enum name="birthday" value="10" />
+            <enum name="password" value="11" />
+            <enum name="new_password" value="12" />
+            <enum name="old_password" value="13" />
+            <enum name="confirm_password" value="14" />
+            <enum name="birthday_older_than_18" value="15" />
+        </attr>
+        <attr name="color_style" format="reference" />
+        <attr name="edit_text_hint" format="string" />
+        <attr name="hide_valid_indicator" format="boolean" />
+    </declare-styleable>
+</resources>

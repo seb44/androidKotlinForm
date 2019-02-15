@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Formulaire</string>
+
+    <string name="common_field_phone_hint">Téléphone</string>
+    <string name="common_field_mobile_phone">Téléphone Mobile</string>
+    <string name="common_field_land_line_phone">Téléphone Fixe</string>
+
+
+    <string name="common_field_email_hint">Votre Email</string>
+
+    <string name="common_field_first_name_hint">Prénom</string>
+    <string name="common_field_last_name_hint">Nom</string>
+    <string name="common_field_email_confirmation_hint">Confirmation EMail</string>
+    <string name="common_field_address_address_hint">Adresse</string>
+    <string name="common_field_postal_code_hint">Code Postal</string>
+    <string name="common_field_city_hint">Ville</string>
+    <string name="common_field_birthday_hint">Date de naissance</string>
+    <string name="common_field_password_hint">Mot de passe</string>
+    <string name="common_field_new_password_hint">Nouveau mot de passe</string>
+    <string name="common_field_old_password_hint">Ancien mot de passe</string>
+    <string name="common_field_password_confirmation_hint">Confirmation du mot de passe</string>
+    <string name="form_error_email_format">L\'adresse E-Mail n\'est pas correcte</string>
+    <string name="form_error_phone_format">Le numéro de téléphone est incorrect</string>
+    <string name="form_error_landline_phone_format">Le numéro de téléphone fixe est incorrect</string>
+    <string name="form_error_mobile_phone_format">Le numéro de téléphone portable est incorrect</string>
+    <string name="form_error_password_format">Le mot de passe doit contenir Majuscule,Minuscule,Chiffres, et 8 caractères min</string>
+    <string name="form_error_confirm_password_format">Votre mot de passe de confirmation est incorrect</string>
+    <string name="form_error_name_format">Caractères spéciaux non autorisés</string>
+    <string name="form_error_confirm_email_format">Votre email de confirmation est incorrect</string>
+    <string name="form_error_postal_code">Aucune ville ne correspond à ce code postal.</string>
+    <string name="form_error_birthday_not_older_than_18">Vous devez avoir plus de 18 ans</string>
+
+</resources>

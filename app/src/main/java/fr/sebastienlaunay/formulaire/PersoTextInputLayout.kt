@@ -2,8 +2,8 @@ package fr.sebastienlaunay.formulaire
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
-import android.support.v7.widget.AppCompatEditText
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
@@ -19,7 +19,7 @@ import java.util.*
 
 
 @Suppress("DEPRECATION")
-class PersoEditText : TextInputLayout, UField {
+class PersoTextInputLayout : TextInputLayout, UField {
 
     enum class Type(val inputType: Int = -1, val hint: Int = -1) {
         FirstName(0, R.string.common_field_first_name_hint),
@@ -45,15 +45,15 @@ class PersoEditText : TextInputLayout, UField {
         }
     }
 
-    lateinit var mEditText: AppCompatEditText
+    private lateinit var mEditText: TextInputEditText
     private lateinit var mType: Type
     private var mHideValidIndicator: Boolean = false
     private var mExternalValidator: Validator? = null
     private var mDisablePatternValidation = false
     private val mCalendar = Calendar.getInstance(TimeZone.getDefault()) // Utilisé par le date picker
 
-    // Permet de vérifier que le contenu (la valeur) d'un autre PersoEditText est identique à celui-ci
-    private var mReferenceToConfirm: PersoEditText? = null
+    // Permet de vérifier que le contenu (la valeur) d'un autre PersoTextInputLayout est identique à celui-ci
+    private var mReferenceToConfirm: PersoTextInputLayout? = null
 
     constructor(context: Context) : super(context) {
         init(context, null, 0)
@@ -69,19 +69,20 @@ class PersoEditText : TextInputLayout, UField {
 
     private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
 
-        mEditText = AppCompatEditText(context)
+        //mEditText = AppCompatEditText(context)
+        mEditText = TextInputEditText(context)
         mEditText.maxLines = 1
         mEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.PersoEditText, defStyleAttr, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.PersoTextInputLayout, defStyleAttr, 0)
 
         // Récupération de la valeur de app:edit_text_hint défini dans le fichier xml
-        val customHint = a.getString(R.styleable.PersoEditText_edit_text_hint)
+        val customHint = a.getString(R.styleable.PersoTextInputLayout_edit_text_hint)
 
         customHint?.let { Log.d("LOGFORM", "customerHint = $it") } ?: run { Log.d("LOGFORM", "customHint non défini") }
 
         // Récupération du type de champs provenant de app:input_type défini dans le fichier xml
-        mType = Type.from(a.getInt(R.styleable.PersoEditText_input_type, -1))
+        mType = Type.from(a.getInt(R.styleable.PersoTextInputLayout_input_type, -1))
 
         if (mType == Type.Text) {
             Log.d("LOGFORM", "app:input_type n'a pas été défini dans le fichier xml - mType.")
@@ -96,14 +97,14 @@ class PersoEditText : TextInputLayout, UField {
 
         // Récupération du Style défini au niveau de app:color_style du fichier xml.
         // Si aucun style défini au niveau du xml, utilisation du style PersoEditTextGrey_EditText
-        val style = a.getResourceId(R.styleable.PersoEditText_color_style, R.style.PersoEditTextGrey_EditText)
+        val style = a.getResourceId(R.styleable.PersoTextInputLayout_color_style, R.style.PersoTextInputLayout_EditText)
 
         mEditText.setTextAppearance(context, style)
 
         // Récupération de app:hide_valid_indicator défini dans le fichier xml
         // Si celui-ci n'existe pas, prend la valeur false par défaut
         // Cela va permettre d'afficher ou de cacher l'indicateur de validation du champ dans la méthode valide()
-        mHideValidIndicator = a.getBoolean(R.styleable.PersoEditText_hide_valid_indicator, false)
+        mHideValidIndicator = a.getBoolean(R.styleable.PersoTextInputLayout_hide_valid_indicator, false)
 
         a.recycle()
 
@@ -140,8 +141,7 @@ class PersoEditText : TextInputLayout, UField {
             when (mType) {
                 // Par exemple, l'edittext pour un type Phone, sera limiter à PHONE_NUMBER_LENGTH caractères
                 Type.Phone -> filters = arrayOf(InputFilter.LengthFilter(Constants.InputType.PHONE_NUMBER_LENGTH))
-                Type.FirstName, Type.LastName -> filters =
-                        arrayOf(InputFilter.LengthFilter(Constants.InputType.MAX_LENGTH))
+                Type.FirstName, Type.LastName -> filters = arrayOf(InputFilter.LengthFilter(Constants.InputType.MAX_LENGTH))
             }
         }
 
@@ -154,11 +154,10 @@ class PersoEditText : TextInputLayout, UField {
 
             when (mType) {
                 Type.BirthDay, Type.BirthDayOlderThan18 -> openBirthdayDatePicker()
-
             }
         }
 
-        mEditText.setOnFocusChangeListener { view, focus ->
+        mEditText.setOnFocusChangeListener { _, focus ->
 
             Log.d("LOGFORM", "FocusChanged - View : $contentDescription - Focus : $focus ")
 
@@ -209,7 +208,7 @@ class PersoEditText : TextInputLayout, UField {
 
         // La vérification interne correspond la logique suivante :
         //
-        //        Le Champ PersoEditText est Valide
+        //        Le Champ PersoTextInputLayout est Valide
         //
         //        SI (
         //            Ce champ n'est pas visible (View.VISIBLE)
@@ -236,7 +235,7 @@ class PersoEditText : TextInputLayout, UField {
         Log.d("LOGFORM", "Affichage du date picker")
         DatePickerDialog(
             context,
-            R.style.PersoEditText_DatePickerDialog,
+            R.style.PersoTextInputLayout_DatePickerDialog,
 
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 mCalendar.set(Calendar.YEAR, year)
@@ -253,7 +252,7 @@ class PersoEditText : TextInputLayout, UField {
         }
     }
 
-    // Permet d'effectuer la validation du PersoEditText
+    // Permet d'effectuer la validation du PersoTextInputLayout
     fun validate(showError: Boolean = true) {
 
         // Si on ne doit pas afficher l'erreur, on enlève l'icone X ou V
@@ -310,19 +309,19 @@ class PersoEditText : TextInputLayout, UField {
     }
 
     // Permet de ne faire aucune validation du pattern en interne.
-    fun disablePatternValidation(): PersoEditText {
+    fun disablePatternValidation(): PersoTextInputLayout {
         mDisablePatternValidation = true
         return this
     }
 
     // Permet de faire la validation du champ en externe
-    fun withExternalValidator(validator: Validator): PersoEditText {
+    fun withExternalValidator(validator: Validator): PersoTextInputLayout {
         mExternalValidator = validator
         return this
     }
 
-    // Permet de vérifier que la valeur d'une référence (d'un PersoEditText) est équivalente à une autre référence
-    fun isIdenticalTo(reference: PersoEditText): PersoEditText {
+    // Permet de vérifier que la valeur d'une référence (d'un PersoTextInputLayout) est équivalente à une autre référence
+    fun isIdenticalTo(reference: PersoTextInputLayout): PersoTextInputLayout {
         mReferenceToConfirm = reference
         return this
     }

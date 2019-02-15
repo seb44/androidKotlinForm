@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="PersoEditText">
+    <declare-styleable name="PersoTextInputLayout">
         <attr name="input_type">
             <enum name="first_name" value="0" />
             <enum name="last_name" value="1" />

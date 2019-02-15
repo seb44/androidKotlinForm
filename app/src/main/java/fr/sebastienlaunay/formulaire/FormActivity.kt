@@ -16,6 +16,7 @@ class FormActivity : AppCompatActivity() {
         /********************************************************************/
         // On met une valeur incorrecte dans le champ du téléphone
         phone.value="44"   // A ce stade, le message d'erreur ainsi que la croix est affichée dans la view
+
         Log.d("LOGFORM","Validation du phone pattern = ${phone.isValid()}") // La valeur est "false"
 
         // On demande de ne plus faire de vérification du champ
@@ -32,11 +33,11 @@ class FormActivity : AppCompatActivity() {
 
 
 
-        /***************************************************************************************************/
-        /*Permet de faire la vérification/validation en externe au lieu de le faire dans PersoEditText     */
-        /***************************************************************************************************/
+        /**********************************************************************************************************/
+        /*Permet de faire la vérification/validation en externe au lieu de le faire dans PersoTextInputLayout     */
+        /**********************************************************************************************************/
         /*
-         etEmail.withExternalValidator(object : PersoEditText.Validator {
+         etEmail.withExternalValidator(object : PersoTextInputLayout.Validator {
             override fun isValid(): Boolean {
                 // Faire la vérification
                 return true // or False !

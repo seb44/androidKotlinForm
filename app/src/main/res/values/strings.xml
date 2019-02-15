@@ -4,10 +4,7 @@
     <string name="common_field_phone_hint">Téléphone</string>
     <string name="common_field_mobile_phone">Téléphone Mobile</string>
     <string name="common_field_land_line_phone">Téléphone Fixe</string>
-
-
     <string name="common_field_email_hint">Votre Email</string>
-
     <string name="common_field_first_name_hint">Prénom</string>
     <string name="common_field_last_name_hint">Nom</string>
     <string name="common_field_email_confirmation_hint">Confirmation EMail</string>
@@ -19,6 +16,7 @@
     <string name="common_field_new_password_hint">Nouveau mot de passe</string>
     <string name="common_field_old_password_hint">Ancien mot de passe</string>
     <string name="common_field_password_confirmation_hint">Confirmation du mot de passe</string>
+
     <string name="form_error_email_format">L\'adresse E-Mail n\'est pas correcte</string>
     <string name="form_error_phone_format">Le numéro de téléphone est incorrect</string>
     <string name="form_error_landline_phone_format">Le numéro de téléphone fixe est incorrect</string>
